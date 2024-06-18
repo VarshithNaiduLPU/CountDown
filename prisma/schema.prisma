@@ -19,4 +19,14 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  timers Timer[]
+}
+
+model Timer {
+  id String @id @default(uuid())
+  endDate DateTime
+  skippedDays DateTime[]
+  startDate DateTime
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId String?
 }
